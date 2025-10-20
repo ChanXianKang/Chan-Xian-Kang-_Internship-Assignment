@@ -1,5 +1,3 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/UserPortal.html", "permanent": true }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/UserPortal.html" }]
 }
