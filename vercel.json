@@ -1,5 +1,8 @@
 {
-    "rewrites": [
-        {"source": "/", "destination": "/UserPortal.html"}
-    ]
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/UserPortal.html" }
+  ]
 }
