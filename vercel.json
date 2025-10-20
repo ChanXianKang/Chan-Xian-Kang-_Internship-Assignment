@@ -1,8 +1,5 @@
 {
-  "builds": [
-    { "src": "*.html", "use": "@vercel/static" }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/UserPortal.html" }
+  "redirects": [
+    { "source": "/", "destination": "/UserPortal.html", "permanent": true }
   ]
 }
