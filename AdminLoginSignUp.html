@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login & Sign Up</title>
+    <link rel="stylesheet" href="AdminCSS.css">
+  </head>
+  <body>
+    <!-- LOGIN PAGE (Default visible) -->
+    <div id="loginPage">
+      <h2>Login</h2>
+      <form action="login.php" method="POST">
+        <label for="loginEmail">Email:</label>
+        <input type="text" id="loginEmail" name="email"><br><br>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="password"><br><br>
+
+        <input type="submit" value="Login">
+      </form>
+      <p>Don’t have an account?</p>
+      <button type="button" id="goToSignUp">Sign Up</button>
+    </div>
+
+    <!-- SIGN UP PAGE (Hidden by default) -->
+    <div id="signUpPage">
+      <h2>Sign Up</h2>
+      <form action="signup.php" method="POST">
+        <label for="signUpEmail">Email:</label>
+        <input type="text" id="signUpEmail" name="email"><br><br>
+
+        <label for="signUpPassword">Password:</label>
+        <input type="password" id="signUpPassword" name="password"><br><br>
+
+        <label for="passwordConfirm">Confirm Password:</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm"><br><br>
+
+        <input type="submit" value="Sign Up">
+      </form>
+      <p>Already have an account?</p>
+      <button type="button" id="backToLogin">Back to Login</button>
+    </div>
+
+    <script src="Admin.js"></script>
+  </body>
+</html>
