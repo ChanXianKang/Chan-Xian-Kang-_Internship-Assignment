@@ -1,98 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login & Sign Up</title>
-    <link rel="stylesheet" href="AdminCSS.css">
+    <title>Firebase Auth Test</title>
   </head>
   <body>
-     LOGIN PAGE (Default visible)
-    <div id="loginPage">
-      <h2>Login</h2>
-      <form action="/api/login" method="POST">
-        <label for="loginEmail">Email:</label>
-        <input type="text" id="loginEmail" name="email"><br><br>
+    <h2>Sign Up</h2>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="signupBtn">Sign Up</button>
 
-        <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" name="password"><br><br>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-        <input type="submit" value="Login">
-      </form>
-      <p>Don’t have an account?</p>
-      <button type="button" id="goToSignUp">Sign Up</button>
-    </div>
+      const firebaseConfig = {
+        apiKey: "YOUR_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT",
+      };
 
-     SIGN UP PAGE (Hidden by default) 
-    <div id="signUpPage">
-      <h2>Sign Up</h2>
-      <form action="/api/signup" id="signupForm" method="POST">
-        <label for="signUpEmail">Email:</label>
-        <input type="text" id="signUpEmail" name="email"><br><br>
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-        <label for="signUpPassword">Password:</label>
-        <input type="password" id="signUpPassword" name="password"><br><br>
+      console.log("Script loaded!");
 
-        <label for="passwordConfirm">Confirm Password:</label>
-        <input type="password" id="passwordConfirm" name="passwordConfirm"><br><br>
-
-        <input type="submit" value="Sign Up">
-      </form>
-      <p>Already have an account?</p>
-      <button type="button" id="backToLogin">Back to Login</button>
-    </div>
-    <script>
-      signupForm.addEventListener("submit", async e => {
-        e.preventDefault();
-        const email = document.getElementById("signUpEmail").value;
-        const password = document.getElementById("signUpPassword").value;
-
-        const res = await fetch("/api/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        console.log(data);
+      document.getElementById("signupBtn").addEventListener("click", async () => {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          alert("Signed up: " + userCredential.user.email);
+        } catch (error) {
+          alert("Error: " + error.message);
+        }
       });
-</script>
-
-    <script src="Admin.js"></script>
+    </script>
   </body>
 </html>
-
-
-<!-- <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Login / Signup</title>
-  <link rel="stylesheet" href="/AdminCSS.css">
-</head>
-<body>
-  <div id="loginPage">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <label>Email</label>
-      <input name="email" type="email" required>
-      <label>Password</label>
-      <input name="password" type="password" required>
-      <button type="submit">Login</button>
-    </form>
-    <button id="goToSignUp">Sign Up</button>
-  </div>
-
-  <div id="signUpPage" style="display:none;">
-    <h2>Sign Up</h2>
-    <form id="signupForm">
-      <label>Email</label>
-      <input name="email" type="email" required>
-      <label>Password</label>
-      <input name="password" type="password" required>
-      <button type="submit">Sign Up</button>
-    </form>
-    <button id="backToLogin">Back to Login</button>
-  </div>
-
-  <script src="/Admin.js"></script>
-</body>
-</html> -->
-
